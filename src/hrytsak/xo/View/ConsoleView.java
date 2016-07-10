@@ -7,6 +7,7 @@ import hrytsak.xo.controllers.WinnerController;
 import hrytsak.xo.model.Field;
 import hrytsak.xo.model.Figure;
 import hrytsak.xo.model.Game;
+import hrytsak.xo.model.Player;
 import hrytsak.xo.model.exception.AlreadyOccupiedException;
 import hrytsak.xo.model.exception.InvalidPointException;
 
@@ -24,6 +25,10 @@ public class ConsoleView {
 
     public void show(final Game game) {
         System.out.format("Game name: %s\n", game.getName());
+
+        showPlayersName(game);
+
+
         final Field field = game.getField();
         for (int x = 0; x < field.getSize(); x++) {
             if (x != 0)
@@ -90,6 +95,13 @@ public class ConsoleView {
 
     private void printSeperate() {
         System.out.println("~~~~~~~~~~~");
+    }
+
+    private void showPlayersName(final Game game) {
+        System.out.println("Players:");
+        for (Player player : game) {
+            System.out.format("Player name - %s figure - %s\n", player.getName(), player.getFigure());
+        }
     }
 
 }
