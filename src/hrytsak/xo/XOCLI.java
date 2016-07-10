@@ -7,11 +7,15 @@ import hrytsak.xo.model.Figure;
 import hrytsak.xo.model.Game;
 import hrytsak.xo.model.Player;
 
+import java.util.Scanner;
+
 public class XOCLI {
 
     public static void main(final String[] args) {
-        final String name1 = "Gleb";
-        final String name2 = "Slava";
+        System.out.print("Input player name 1: ");
+        final String name1 = inputName();
+        System.out.print("Input player name 2: ");
+        final String name2 = inputName();
         final Player[] players = new Player[2];
         players[0] = new Player(name1, Figure.X);
         players[1] = new Player(name2, Figure.O);
@@ -23,5 +27,12 @@ public class XOCLI {
             consoleView.show(game);
         }
     }
+
+    static String inputName() {
+        final Scanner sc = new Scanner(System.in);
+        return sc.next();
+    }
+
+    
 
 }
