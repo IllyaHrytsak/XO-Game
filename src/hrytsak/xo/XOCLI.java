@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class XOCLI {
 
     public static void main(final String[] args) {
-        final String name1 = "Gleb";
-        final String name2 = "Slava";
+        final String name1 = "Illya";
+        final String name2 = "Vlad";
 
         final Player[] players = new Player[2];
         players[0] = new Player(name1, Figure.X);
