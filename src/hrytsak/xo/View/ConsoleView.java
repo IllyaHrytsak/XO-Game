@@ -25,14 +25,10 @@ public class ConsoleView {
 
     public void show(final Game game) {
         System.out.format("Game name: %s\n", game.getName());
-
-        showPlayersName(game);
-
-
         final Field field = game.getField();
         for (int x = 0; x < field.getSize(); x++) {
             if (x != 0)
-                printSeperate();
+                printSeparator();
             printLine(field, x);
         }
     }
@@ -46,15 +42,15 @@ public class ConsoleView {
         }
         final Figure currentFigure = currentMoveController.currentMove(field);
         if (currentFigure == null) {
-            System.out.println("Draw");
+            System.out.println("No winner and no moves left!");
             return false;
         }
         System.out.format("Please enter move point for: %s\n", currentFigure);
         final Point point = askPoint();
         try {
-            moveController.applyFigure(field, currentFigure, point);
-        } catch (InvalidPointException | AlreadyOccupiedException e) {
-            System.out.println("Point is invalid");
+            moveController.applyFigure(field, point, currentFigure);
+        } catch (final InvalidPointException | AlreadyOccupiedException e) {
+            System.out.println("Point is invalid!");
         }
         return true;
     }
@@ -64,17 +60,18 @@ public class ConsoleView {
     }
 
     private int askCoordinate(final String coordinateName) {
-        System.out.format("Please input coordinate %s:", coordinateName);
+        System.out.format("Please input %s:", coordinateName);
         final Scanner in = new Scanner(System.in);
         try {
             return in.nextInt();
         } catch (final InputMismatchException e) {
-            System.out.println("0_0 rly ?");
+            System.out.println("0_0 olololo!!!!!");
             return askCoordinate(coordinateName);
         }
     }
 
-    private void printLine(final Field field, final  int x) {
+    private void printLine(final Field field,
+                           final int x) {
         for (int y = 0; y < field.getSize(); y++) {
             if (y != 0)
                 System.out.print("|");
@@ -90,18 +87,10 @@ public class ConsoleView {
             System.out.print(" ");
         }
         System.out.println();
-
     }
 
-    private void printSeperate() {
+    private void printSeparator() {
         System.out.println("~~~~~~~~~~~");
-    }
-
-    private void showPlayersName(final Game game) {
-        System.out.println("Players:");
-        for (Player player : game) {
-            System.out.format("Player name - %s figure - %s\n", player.getName(), player.getFigure());
-        }
     }
 
 }
