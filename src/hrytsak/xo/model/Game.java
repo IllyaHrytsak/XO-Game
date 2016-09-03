@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class Game implements Iterable<Player> {
+public class Game {
 
     private final Player[] players;
 
@@ -13,7 +13,9 @@ public class Game implements Iterable<Player> {
 
     private final String name;
 
-    public Game(final Player[] players, final Field field, final String name) {
+    public Game(final Player[] players,
+                final Field field,
+                final String name) {
         this.players = players;
         this.field = field;
         this.name = name;
@@ -30,29 +32,5 @@ public class Game implements Iterable<Player> {
     public String getName() {
         return name;
     }
-
-    @Override
-    public Iterator<Player> iterator() {
-        return new PlayerIterator();
-    }
-
-    private class PlayerIterator implements Iterator<Player> {
-        private int index = 0;
-
-
-        @Override
-        public boolean hasNext() {
-            return Game.this.players.length > index;
-        }
-
-        @Override
-        public Player next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
-            return Game.this.players[index++];
-        }
-    }
-
 
 }
